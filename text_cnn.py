@@ -10,6 +10,16 @@ class TextCNN(object):
     def __init__(
       self, sequence_length, num_classes, vocab_size,
       embedding_size, filter_sizes, num_filters, l2_reg_lambda=0.0):
+        """
+
+        :param sequence_length: The length of our sentences, with padding as necessary.
+        :param num_classes: The number of classes in the output layer. Two for a binary True/False, for example.
+        :param vocab_size: The size of our vocabulary. Necessary for defining the size of the embedding layer, which will have the shape of [vocabulary_size, embedding_size].
+        :param embedding_size: Dimensionality of our embeddings.
+        :param filter_sizes: The number of words for the convolutional filters to cover. We'll have num_filters for each size specified here - example: [3, 4, 5] means that we'll have filters that slide over 3, 4, and 5 words respectively, for a total of 3 * num_filters filters.
+        :param num_filters: The number of filters per filter size.
+        :param l2_reg_lambda:
+        """
 
         # Placeholders for input, output and dropout
         self.input_x = tf.placeholder(tf.int32, [None, sequence_length], name="input_x")
