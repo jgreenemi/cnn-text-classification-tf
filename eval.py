@@ -14,8 +14,10 @@ import csv
 # ==================================================
 
 # Data Parameters
-tf.flags.DEFINE_string("positive_data_file", "./data/rt-polaritydata/rt-polarity.pos", "Data source for the positive data.")
-tf.flags.DEFINE_string("negative_data_file", "./data/rt-polaritydata/rt-polarity.neg", "Data source for the positive data.")
+#tf.flags.DEFINE_string("positive_data_file", "./data/rt-polaritydata/rt-polarity.pos", "Data source for the positive data.")
+tf.flags.DEFINE_string("reddit_text_data_file", "./data/tpp-data/text_from_reddit.csv", "Data source for the text from Reddit comments.")  # Positive result.
+#tf.flags.DEFINE_string("negative_data_file", "./data/rt-polaritydata/rt-polarity.neg", "Data source for the positive data.")
+tf.flags.DEFINE_string("paper_text_data_file", "./data/tpp-data/text_from_papers.csv", "Data source for the text from papers.") # Negative result.
 
 # Eval Parameters
 tf.flags.DEFINE_integer("batch_size", 64, "Batch Size (default: 64)")
@@ -36,10 +38,10 @@ print("")
 
 # CHANGE THIS: Load data. Load your own data here
 if FLAGS.eval_train:
-    x_raw, y_test = data_helpers.load_data_and_labels(FLAGS.positive_data_file, FLAGS.negative_data_file)
+    x_raw, y_test = data_helpers.load_data_and_labels(FLAGS.reddit_text_data_file, FLAGS.paper_text_data_file)
     y_test = np.argmax(y_test, axis=1)
 else:
-    x_raw = ["a masterpiece four years in the making", "everything is off."]
+    x_raw = ["using a banana for scale", "defining the benefits of recurrent neural networks versus convolutional"]
     y_test = [1, 0]
 
 # Map data into vocabulary
