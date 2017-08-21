@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#! /usr/bin/env python
 
 import tensorflow as tf
 import numpy as np
@@ -17,7 +17,7 @@ import csv
 #tf.flags.DEFINE_string("positive_data_file", "./data/rt-polaritydata/rt-polarity.pos", "Data source for the positive data.")
 tf.flags.DEFINE_string("reddit_text_data_file", "./data/tpp-data/text_from_reddit.csv", "Data source for the text from Reddit comments.")  # Positive result.
 #tf.flags.DEFINE_string("negative_data_file", "./data/rt-polaritydata/rt-polarity.neg", "Data source for the positive data.")
-tf.flags.DEFINE_string("paper_text_data_file", "./data/tpp-data/text_from_papers.csv", "Data source for the text from papers.") # Negative result.
+tf.flags.DEFINE_string("paper_text_data_file", "./data/tpp-data/text_from_papers.csv", "Data source for the text from papers.")  # Negative result.
 
 # Eval Parameters
 tf.flags.DEFINE_integer("batch_size", 64, "Batch Size (default: 64)")
@@ -62,6 +62,7 @@ with graph.as_default():
     sess = tf.Session(config=session_conf)
     with sess.as_default():
         # Load the saved meta graph and restore variables
+        print("Loading graph from: {}.meta".format(checkpoint_file))  # DEBUG
         saver = tf.train.import_meta_graph("{}.meta".format(checkpoint_file))
         saver.restore(sess, checkpoint_file)
 
