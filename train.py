@@ -15,9 +15,9 @@ from tensorflow.contrib import learn
 # Data loading params
 tf.flags.DEFINE_float("dev_sample_percentage", .1, "Percentage of the training data to use for validation")
 #tf.flags.DEFINE_string("positive_data_file", "./data/rt-polaritydata/rt-polarity.pos", "Data source for the positive data.")
-tf.flags.DEFINE_string("reddit_text_data_file", "./data/tpp-data/text_from_reddit.csv", "Data source for the text from Reddit comments.")  # Positive result.
+tf.flags.DEFINE_string("reddit_text_data_file", "./data/tpp-data/text_from_reddit.txc", "Data source for the text from Reddit comments.")  # Positive result.
 #tf.flags.DEFINE_string("negative_data_file", "./data/rt-polaritydata/rt-polarity.neg", "Data source for the positive data.")
-tf.flags.DEFINE_string("paper_text_data_file", "./data/tpp-data/text_from_papers.csv", "Data source for the text from papers.") # Negative result.
+tf.flags.DEFINE_string("paper_text_data_file", "./data/tpp-data/text_from_papers.txc", "Data source for the text from papers.") # Negative result.
 
 # Model Hyperparameters
 tf.flags.DEFINE_integer("embedding_dim", 128, "Dimensionality of character embedding (default: 128)")
