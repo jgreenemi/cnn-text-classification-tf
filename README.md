@@ -8,6 +8,19 @@ It is slightly simplified implementation of Kim's [Convolutional Neural Networks
 - Tensorflow > 0.12
 - Numpy
 
+## Setup
+
+```
+$ git clone https://github.com/jgreenemi/cnn-text-classification-tf.git && cd cnn-text-classification-tf
+$ virtualenv -p python3 env
+$ source env/bin/activate
+(env) $ python --version
+Python 3.x.y
+(env) $ pip --version
+pip 9.0.1 from ./cnn-text-classification-tf/env/lib/python3.6/site-packages (python 3.6)
+(env) $ pip install -r requirements.txt 
+```
+
 ## Training
 
 Print parameters:
