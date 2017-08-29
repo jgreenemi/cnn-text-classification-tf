@@ -14,10 +14,8 @@ from tensorflow.contrib import learn
 
 # Data loading params
 tf.flags.DEFINE_float("dev_sample_percentage", .1, "Percentage of the training data to use for validation")
-#tf.flags.DEFINE_string("positive_data_file", "./data/rt-polaritydata/rt-polarity.pos", "Data source for the positive data.")
-tf.flags.DEFINE_string("reddit_text_data_file", "./data/tpp-data/text_from_reddit.txc", "Data source for the text from Reddit comments.")  # Positive result.
-#tf.flags.DEFINE_string("negative_data_file", "./data/rt-polaritydata/rt-polarity.neg", "Data source for the positive data.")
-tf.flags.DEFINE_string("paper_text_data_file", "./data/tpp-data/text_from_papers.txc", "Data source for the text from papers.") # Negative result.
+tf.flags.DEFINE_string("interest_data_file", "./data/tpp-data/interest.txt", "Data source for the interesting subreddits.")  # Positive result.
+tf.flags.DEFINE_string("avoid_data_file", "./data/tpp-data/avoid.txt", "Data source for the subreddits to avoid.")  # Negative result.
 
 # Model Hyperparameters
 tf.flags.DEFINE_integer("embedding_dim", 128, "Dimensionality of character embedding (default: 128)")
@@ -49,7 +47,7 @@ print("")
 
 # Load data
 print("Loading data...")
-x_text, y = data_helpers.load_data_and_labels(FLAGS.reddit_text_data_file, FLAGS.paper_text_data_file)  # Positive, negative.
+x_text, y = data_helpers.load_data_and_labels(FLAGS.interest_data_file, FLAGS.avoid_data_file)  # Positive, negative.
 
 # Build vocabulary
 max_document_length = max([len(x.split(" ")) for x in x_text])
