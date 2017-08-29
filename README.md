@@ -19,6 +19,8 @@ Python 3.x.y
 (env) $ pip --version
 pip 9.0.1 from ./cnn-text-classification-tf/env/lib/python3.6/site-packages (python 3.6)
 (env) $ pip install -r requirements.txt 
+# If the pip install fails on OS X, you may need to install the TF binary directly, similar to the following:
+$ pip install --upgrade https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-1.2.1-py3-none-any.whl
 ```
 
 ## Training
