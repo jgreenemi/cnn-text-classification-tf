@@ -14,8 +14,8 @@ from tensorflow.contrib import learn
 
 # Data loading params
 tf.flags.DEFINE_float("dev_sample_percentage", .1, "Percentage of the training data to use for validation")
-tf.flags.DEFINE_string("interest_data_file", "./data/tpp-data/interest.txt", "Data source for the interesting subreddits.")  # Positive result.
-tf.flags.DEFINE_string("avoid_data_file", "./data/tpp-data/avoid.txt", "Data source for the subreddits to avoid.")  # Negative result.
+tf.flags.DEFINE_string("interest_data_file", "./data/tpp-data/training-interest.txt", "Data source for the interesting subreddits.")  # Positive result.
+tf.flags.DEFINE_string("avoid_data_file", "./data/tpp-data/training-avoid.txt", "Data source for the subreddits to avoid.")  # Negative result.
 
 # Model Hyperparameters
 tf.flags.DEFINE_integer("embedding_dim", 128, "Dimensionality of character embedding (default: 128)")

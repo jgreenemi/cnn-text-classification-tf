@@ -14,8 +14,8 @@ import csv
 # ==================================================
 
 # Data Parameters
-tf.flags.DEFINE_string("interest_data_file", "./data/tpp-data/interest.txt", "Data source for the interesting subreddits.")  # Positive result.
-tf.flags.DEFINE_string("avoid_data_file", "./data/tpp-data/avoid.txt", "Data source for the subreddits to avoid.")  # Negative result.
+tf.flags.DEFINE_string("interest_data_file", "./data/tpp-data/eval-interest.txt", "Data source for the interesting subreddits.")  # Positive result.
+tf.flags.DEFINE_string("avoid_data_file", "./data/tpp-data/eval-avoid.txt", "Data source for the subreddits to avoid.")  # Negative result.
 
 # Eval Parameters
 tf.flags.DEFINE_integer("batch_size", 64, "Batch Size (default: 64)")
