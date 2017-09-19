@@ -12,7 +12,7 @@ It is slightly simplified implementation of Kim's [Convolutional Neural Networks
 
 ```
 $ git clone https://github.com/jgreenemi/cnn-text-classification-tf.git && cd cnn-text-classification-tf
-$ virtualenv -p python3 env
+$ virtualenv --python=python3 env
 $ source env/bin/activate
 (env) $ python --version
 Python 3.x.y
