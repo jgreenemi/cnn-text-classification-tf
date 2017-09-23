@@ -14,8 +14,8 @@ import csv
 # ==================================================
 
 # Data Parameters
-tf.flags.DEFINE_string("positive_data_file", "./data/rt-polaritydata/rt-polarity.pos", "Data source for the positive data.")
-tf.flags.DEFINE_string("negative_data_file", "./data/rt-polaritydata/rt-polarity.neg", "Data source for the positive data.")
+tf.flags.DEFINE_string("interest_data_file", "./data/tpp-data/eval-interest.txt", "Data source for the interesting subreddits.")  # Positive result.
+tf.flags.DEFINE_string("avoid_data_file", "./data/tpp-data/eval-avoid.txt", "Data source for the subreddits to avoid.")  # Negative result.
 
 # Eval Parameters
 tf.flags.DEFINE_integer("batch_size", 64, "Batch Size (default: 64)")
@@ -36,10 +36,10 @@ print("")
 
 # CHANGE THIS: Load data. Load your own data here
 if FLAGS.eval_train:
-    x_raw, y_test = data_helpers.load_data_and_labels(FLAGS.positive_data_file, FLAGS.negative_data_file)
+    x_raw, y_test = data_helpers.load_data_and_labels(FLAGS.interest_data_file, FLAGS.avoid_data_file)
     y_test = np.argmax(y_test, axis=1)
 else:
-    x_raw = ["a masterpiece four years in the making", "everything is off."]
+    x_raw = ["using a banana for scale", "defining the benefits of recurrent neural networks versus convolutional"]
     y_test = [1, 0]
 
 # Map data into vocabulary
@@ -60,6 +60,7 @@ with graph.as_default():
     sess = tf.Session(config=session_conf)
     with sess.as_default():
         # Load the saved meta graph and restore variables
+        print("Loading graph from: {}.meta".format(checkpoint_file))  # DEBUG
         saver = tf.train.import_meta_graph("{}.meta".format(checkpoint_file))
         saver.restore(sess, checkpoint_file)
 
