@@ -33,6 +33,9 @@ tf.flags.DEFINE_integer("num_checkpoints", 5, "Number of checkpoints to store (d
 # Misc Parameters
 tf.flags.DEFINE_boolean("allow_soft_placement", True, "Allow device soft device placement")
 tf.flags.DEFINE_boolean("log_device_placement", False, "Log placement of ops on devices")
+# Thread-limiting parameters
+tf.flags.DEFINE_boolean("intra_op_parallelism_threads", 1, "Limiting session to use a max number of threads")
+tf.flags.DEFINE_boolean("inter_op_parallelism_threads", 1, "Limiting session to use a max number of threads")
 
 FLAGS = tf.flags.FLAGS
 FLAGS._parse_flags()
@@ -47,7 +50,7 @@ print("")
 
 # Load data
 print("Loading data...")
-x_text, y = data_helpers.load_data_and_labels(FLAGS.positive_data_file, FLAGS.negative_data_file)
+x_text, y = data_helpers.load_data_and_labels(FLAGS.interest_data_file, FLAGS.avoid_data_file)  # Positive, negative.
 
 # Build vocabulary
 max_document_length = max([len(x.split(" ")) for x in x_text])
@@ -75,7 +78,9 @@ print("Train/Dev split: {:d}/{:d}".format(len(y_train), len(y_dev)))
 with tf.Graph().as_default():
     session_conf = tf.ConfigProto(
       allow_soft_placement=FLAGS.allow_soft_placement,
-      log_device_placement=FLAGS.log_device_placement)
+      log_device_placement=FLAGS.log_device_placement,
+      intra_op_parallelism_threads=FLAGS.intra_op_parallelism_threads,
+      inter_op_parallelism_threads=FLAGS.inter_op_parallelism_threads)
     sess = tf.Session(config=session_conf)
     with sess.as_default():
         cnn = TextCNN(
