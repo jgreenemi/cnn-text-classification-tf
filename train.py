@@ -13,7 +13,7 @@ from tensorflow.contrib import learn
 # ==================================================
 
 # Data loading params
-tf.flags.DEFINE_float("dev_sample_percentage", .1, "Percentage of the training data to use for validation")
+tf.flags.DEFINE_float("dev_sample_percentage", .3, "Percentage of the training data to use for validation")
 tf.flags.DEFINE_string("interest_data_file", "./data/tpp-data/training-interest.txt", "Data source for the interesting subreddits.")  # Positive result.
 tf.flags.DEFINE_string("avoid_data_file", "./data/tpp-data/training-avoid.txt", "Data source for the subreddits to avoid.")  # Negative result.
 
@@ -30,6 +30,8 @@ tf.flags.DEFINE_integer("num_epochs", 200, "Number of training epochs (default: 
 tf.flags.DEFINE_integer("evaluate_every", 100, "Evaluate model on dev set after this many steps (default: 100)")
 tf.flags.DEFINE_integer("checkpoint_every", 100, "Save model after this many steps (default: 100)")
 tf.flags.DEFINE_integer("num_checkpoints", 5, "Number of checkpoints to store (default: 5)")
+tf.flags.DEFINE_integer("max_steps", 10000, "Number of training steps to run before exiting (default: 10000)")
+
 # Misc Parameters
 tf.flags.DEFINE_boolean("allow_soft_placement", True, "Allow device soft device placement")
 tf.flags.DEFINE_boolean("log_device_placement", False, "Log placement of ops on devices")
@@ -183,3 +185,8 @@ with tf.Graph().as_default():
             if current_step % FLAGS.checkpoint_every == 0:
                 path = saver.save(sess, checkpoint_prefix, global_step=current_step)
                 print("Saved model checkpoint to {}\n".format(path))
+
+            if not FLAGS.max_steps <= 0 and current_step >= FLAGS.max_steps:
+                print("Max step reached! Ending this training session.")
+                with open("~/multiple-training-results.csv", "a+") as f:
+                    f.write("{},{},{}\n".format(checkpoint_prefix, path, FLAGS.l2_reg_lambda))
