@@ -3,6 +3,7 @@
 import tensorflow as tf
 import numpy as np
 import os
+import sys
 import time
 import datetime
 import data_helpers
@@ -190,3 +191,4 @@ with tf.Graph().as_default():
                     print("Max step reached! Ending this training session.")
                     with open("/home/ubuntu/multiple-training-results.csv", "a+") as f:
                         f.write("{},{},{}\n".format(checkpoint_prefix, path, FLAGS.l2_reg_lambda))
+                    sys.exit(0)
