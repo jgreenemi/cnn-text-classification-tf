@@ -187,8 +187,10 @@ with tf.Graph().as_default():
                 path = saver.save(sess, checkpoint_prefix, global_step=current_step)
                 print("Saved model checkpoint to {}\n".format(path))
 
+                # Using this to limit the steps the training will take for quickly trying
+                # different parameters for performance comparisons.
                 if not FLAGS.max_steps <= 0 and current_step >= FLAGS.max_steps:
                     print("Max step reached! Ending this training session.")
                     with open("/home/ubuntu/multiple-training-results.csv", "a+") as f:
-                        f.write("{},{},{}\n".format(checkpoint_prefix, path, FLAGS.l2_reg_lambda))
+                        f.write("{},{}\n".format(checkpoint_prefix, FLAGS.l2_reg_lambda))
                     sys.exit(0)
